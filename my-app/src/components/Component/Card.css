@@ -1,0 +1,15 @@
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+  background-color: #EEE8AA;
+  font-family: cursive !important;
+  margin: 25px 30px 35px 50px;
+}
+.container {
+  padding: 2px 16px;
+  line-height: 0.6;
+}
+#story_body{
+    line-height: 1.5;    
+}
