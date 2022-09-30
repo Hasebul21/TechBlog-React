@@ -13,3 +13,13 @@
 #story_body{
     line-height: 1.5;    
 }
+#button3 {
+  background-color: #f5f5dc;
+  font-size: 18px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  position: relative;
+  top: -10px;
+  left: 5px;
+  font-family: cursive !important;
+}

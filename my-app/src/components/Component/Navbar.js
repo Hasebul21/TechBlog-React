@@ -1,4 +1,5 @@
 import "./Navbar.css";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -12,10 +13,10 @@ export default function Navbar() {
           <a href="/createblog">CreateBlog</a>
         </li>
         <li>
-          <a href="/blogs">Blogs</a>
+          <Link to="/blogs">Blogs</Link>
         </li>
         <li>
-          <a href="/home">Home</a>
+          <Link to="/">Home</Link>
         </li>
       </ul>
     </nav>

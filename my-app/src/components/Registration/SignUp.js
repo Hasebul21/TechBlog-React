@@ -1,4 +1,3 @@
-//import React from "react";
 import { useState } from "react";
 import "./SignUp.css";
 const axios = require("axios").default;
@@ -29,8 +28,7 @@ function SignUp() {
         alert(err.response.data.message);
     });
     //console.log(email + " " + name + " " + phone + " " + password);
-  };
-  console.log(window.location);
+  }; 
   return (
     <div className="login_box">
       <form id="form" onSubmit={submitHandler}>

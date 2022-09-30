@@ -1,8 +1,11 @@
+import jwt from 'jwt-decode' ;
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./SignIn.css";
 const axios = require("axios").default;
 
 function SignIn() {
+  const navigate = useNavigate();
   const [uname, setUname] = useState("");
   const [pass, Setpass] = useState("");
   const handleChange = (e) => {
@@ -26,7 +29,12 @@ function SignIn() {
       withCredentials: true,
     })
       .then((response) => {
-        console.log(response.data);
+       const token=response.data;
+       const user=jwt(token);
+       console.log(user);
+       console.log(user.sub);
+       alert("Successful "+user.sub);
+
       })
       .catch((err) => {
         alert(err.response.data.message);
@@ -49,7 +57,7 @@ function SignIn() {
           />
           <br />
           <input
-            id="password"
+            id="pass"
             type="password"
             name="pass"
             placeholder="Enter Your password"
@@ -58,12 +66,18 @@ function SignIn() {
             onChange={handleChange}
           />
           <br />
-          <button id="button" value="submit">
+          <button id="button1" value="submit">
             submit
           </button>
         </form>
         <h3 id="regis">Not a member yet? Register now</h3>
-        <button id="button2" value="submit">
+        <button
+          id="button2"
+          value="submit"
+          onClick={() => {
+            navigate("/signup");
+          }}
+        >
           SignUp
         </button>
       </div>

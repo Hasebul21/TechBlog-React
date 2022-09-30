@@ -1,9 +1,7 @@
-body{
-
-        height: 100%;
-        background-color: #FFEFD5;
-        background-position: center;
-        
+body {
+  height: 100%;
+  background-color: #ffefd5;
+  background-position: center;
 }
 .login_box {
   background-color: #ebebeb;
@@ -21,21 +19,23 @@ body{
   margin: 8px 0;
   box-sizing: border-box;
 }
-#password {
+#pass {
   font-size: 18px;
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
+  position: relative;
+  top: -5px;
 }
-#button {
+#button1 {
   background-color: #f5f5dc;
   font-size: 18px;
   padding: 12px 18px;
   border-radius: 12px;
   position: relative;
   left: 140px;
-  top: 16px;
+  top: 15px;
   font-family: cursive !important;
 }
 #heading {
@@ -43,20 +43,17 @@ body{
   position: relative;
   left: 60px;
 }
-#navbar{
-
+#navbar {
   font-size: 22px;
   position: relative;
   top: -10px;
 }
-#regis{
-
+#regis {
   font-family: cursive !important;
   position: relative;
   top: 50px;
 }
-#button2{
-    
+#button2 {
   background-color: #f5f5dc;
   font-size: 18px;
   padding: 12px 18px;

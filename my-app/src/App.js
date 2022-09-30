@@ -1,22 +1,21 @@
-import Navbar from "./components/Component/Navbar";
-//import Clock from "./components/Clock";
-//import Form from "./components/Login/login";
-//import ClockList from "./components/ClockList";
-//import RegistrationForm from "./components/Registration/registration";
-
-//import SignIn from "./components/Login/SignIn";
-//import SignUp from "./components/Registration/SignUp";
-//import Blogs from "./components/AllBlogs/Blogs";
-
-//import SignUp from "./components/Registration/SignUp";
+import Blogs from "./components/AllBlogs/Blogs";
+import SignUp from "./components/Registration/SignUp";
 import SignIn from "./components/Login/SignIn";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Component/Navbar";
+import Story from "./components/Component/Story";
 
 function App() {
   return (
-    <div>
-      <Navbar/>
-      <SignIn/>
-    </div>
+    <BrowserRouter>
+    <Navbar/>
+      <Routes>
+        <Route path="/" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp/>} />
+        <Route path="/blogs" element={<Blogs/>} />
+        <Route path="/story/:storyId" element={<Story/>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
