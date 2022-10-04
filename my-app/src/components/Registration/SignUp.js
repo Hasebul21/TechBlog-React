@@ -10,7 +10,7 @@ function SignUp() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const { setToken } = useContext(authcontext);
+  const { setLogStatus } = useContext(authcontext);
   const navigate = useNavigate();
 
   const submitHandler = async (e) => {
@@ -27,8 +27,11 @@ function SignUp() {
     })
     .then((response) => {
       alert("Sucessfully Registerd");
-      setToken(JSON.stringify(response.data));
-      navigate("/blogs");
+      const token = response.data;
+      localStorage.setItem('token', token);
+      console.log(token);
+      setLogStatus(true);
+      navigate("/");
     })
     .catch((err) => {
         alert(err.response.data.message);

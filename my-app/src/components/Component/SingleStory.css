@@ -38,7 +38,7 @@
      font-family: cursive !important;
      margin: 8px 0;
      position: relative;
-     top: -1px;
+     top: -30px;
      left: 0px;
      font-weight: bold;
 }
@@ -50,6 +50,27 @@
      position: relative;
      top: 3px;
      font-weight: bold;
+}
+#des-lab{
+
+  font-size: 18px;
+  font-family: cursive !important;
+  margin: 8px 0;
+  position: relative;
+  top: 3px;
+  font-weight: bold;
+}
+#date-lab{
+
+  font-size: 18px;
+  font-family: cursive !important;
+  margin: 8px 0;
+  position: relative;
+  top: 3px;
+  font-weight: bold;
+  position: relative;
+  left: -210px;
+  top: -1px;
 }
 #button-sav{
   background-color: #f5f5dc;

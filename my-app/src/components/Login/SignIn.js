@@ -1,5 +1,5 @@
 import jwt from 'jwt-decode' ;
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SignIn.css";
 import { authcontext } from '../Component/AuthContext';
@@ -10,7 +10,17 @@ function SignIn() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setToken } = useContext(authcontext);
+  const { islogged , setLogStatus  } = useContext(authcontext);
+
+  useEffect(() => {
+  
+    let jwtToken =localStorage.getItem('token')||null;
+    console.log("In signup "+jwtToken);
+    if(jwtToken!=null) {
+      navigate("/");
+    }
+  },[]);
+
   const submitHandler = async (e) => {
     e.preventDefault();
     await axios({
@@ -23,10 +33,11 @@ function SignIn() {
     })
     .then((response) => {
       const token = response.data;
-      setToken(token);
+      //setToken(token);
       localStorage.setItem('token', token);
       console.log(token);
-      navigate("/blogs");
+      setLogStatus(true);
+      navigate("/");
 
     })
     .catch((err) => {
@@ -58,20 +69,10 @@ function SignIn() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <br />
-          <button id="button1" value="submit">
+          <button id="button1" value="submit" onClick="window.location.reload()">
             submit
           </button>
         </form>
-        <h3 id="regis">Not a member yet? Register now</h3>
-        <button
-          id="button2"
-          value="submit"
-          onClick={() => {
-            navigate("/signup");
-          }}
-        >
-          SignUp
-        </button>
       </div>
     </div>
   );

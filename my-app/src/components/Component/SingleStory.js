@@ -12,12 +12,14 @@ export default function Story() {
   const[title, setTitle]=useState("");
   const[description, setDescription]=useState("");
   const [author, setAuthor] = useState("");
+  const [createdDate, setCreatedDate] = useState("");
   const[validAuthor,setValidAuth]=useState(null);
+  const[jwtToken,setJwtToken]=useState(null);
   const navigate = useNavigate();
-  
-  const { token } = useContext(authcontext);
+
+  //const { token } = useContext(authcontext);
   //const[date, setCreatedate]=useState("");
-  
+
   useEffect(() => {
 
     const jwtToken =localStorage.getItem('token')||null;
@@ -30,6 +32,11 @@ export default function Story() {
        const user=jwt_decode(jwtToken);
        console.log(user.sub);
        setValidAuth(user.sub);
+       setJwtToken(jwtToken);
+
+    }else {
+
+      navigate("/");
 
     }
 
@@ -41,10 +48,11 @@ export default function Story() {
       setTitle(story.title);
       setDescription(story.description);
       setAuthor(story.author);
-      //setCreatedate(story.createdDate);
+      setCreatedDate(story.createdDate);
     };
     fetchData();
   }, [storyId]);
+
   //console.log("Title : "+title);
   const updateHandler = async (e) => {
     e.preventDefault();
@@ -55,11 +63,11 @@ export default function Story() {
         title: title,
         description: description,
       },
-      headers : { Authorization: `Bearer ${token}` },
+      headers : { Authorization: `Bearer ${jwtToken}` },
     })
     .then((response) => {
       alert("Sucessfully Updated");
-      navigate("/blogs");
+      navigate("/");
     })
     .catch((err) => {
         alert(err.response.data.message);
@@ -71,11 +79,11 @@ export default function Story() {
   await axios({
       method: "delete",
       url: "http://localhost:8080/api/v1/stories/"+storyId,
-      headers : { Authorization: `Bearer ${token}` },
+      headers : { Authorization: `Bearer ${jwtToken}` },
   })
   .then((response) => {
     alert("Sucessfully Deleted");
-    navigate("/blogs");
+    navigate("/");
   })
   .catch((err) => {
         alert(err.response.data.message);
@@ -85,19 +93,21 @@ export default function Story() {
   return (
     <div className="story-container">
       <label id="auth-lab">Author : {author}</label>
+      <label id="date-lab">CreatedDate: {createdDate}</label>
       <br/>
       <label id="title-lab">Title</label>
       <textarea disabled={author!=validAuthor} type="text" rows="2" id="title-box" value={title}  onChange={(e) => setTitle(e.target.value)}></textarea>
       <br />
       <label id="des-lab">Description</label>
+      <br />
       <textarea disabled={author!=validAuthor} type="text" rows="4" id="des-box" value={description} onChange={(e) => setDescription(e.target.value)} ></textarea>
-      { (validAuthor==author) 
-         && 
-        (<button id="button-sav" value="submit" onClick={updateHandler}>Save</button>) 
+      { (validAuthor==author)
+         &&
+        (<button id="button-sav" value="submit" onClick={updateHandler}>Save</button>)
       }
       {
-         (validAuthor==author) 
-          && 
+         (validAuthor==author)
+          &&
          (<button id="button-del" value="submit" onClick={deleteHandler}>Delete</button>)
       }
     </div>

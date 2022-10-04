@@ -17,9 +17,12 @@ function CreateBlog() {
          let jwtToken =localStorage.getItem('token')||null;
          console.log(jwtToken);
          if(jwtToken===null) navigate("/");
-         jwtToken=jwtToken.replaceAll('"', '');
-         console.log("Cool" + jwtToken);
-         setJwtToken(jwtToken);
+         if(jwtToken!=null){
+
+            jwtToken=jwtToken.replaceAll('"', '');
+            console.log("Cool" + jwtToken);
+            setJwtToken(jwtToken);
+         }
            
        }, []);
 
@@ -36,7 +39,7 @@ function CreateBlog() {
          })
         .then((response) => {
                 alert("Sucessfully Created");
-                navigate("/blogs");
+                navigate("/");
         })
         .catch((err) => {
            alert("Unauthorized User. Please login first");

@@ -11,7 +11,7 @@ function Card(props) {
         <h3 id="story_title">Title : {data.title}</h3>
         <h4 id="story_author">Author : {data.author}</h4>
         <h4 id="story_date">CreatedDate : {data.createdDate}</h4>
-        <h4 id="story_body">Description: {data.description}</h4>
+        <input type="text" id="story_body" maxlength="10" disabled value={data.description}/>
         <button id="button3"  onClick={() => navigate(`/story/${data.id}`) }>View Details</button>
       </div>
     </div>
