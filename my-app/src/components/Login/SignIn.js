@@ -1,46 +1,38 @@
 import jwt from 'jwt-decode' ;
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SignIn.css";
-const axios = require("axios").default;
+import { authcontext } from '../Component/AuthContext';
+import React, { Component }  from 'react';
+import axios from 'axios';
 
 function SignIn() {
   const navigate = useNavigate();
-  const [uname, setUname] = useState("");
-  const [pass, Setpass] = useState("");
-  const handleChange = (e) => {
-    console.log("In handle event");
-    if (e.target.name === "uname") {
-      setUname(e.target.value);
-    } else if (e.target.name === "pass") {
-      Setpass(e.target.value);
-    }
-  };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { setToken } = useContext(authcontext);
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(uname + " " + pass);
     await axios({
       method: "post",
       url: "http://localhost:8080/api/v1/signin",
       data: {
-        email: uname,
-        password: pass,
+        email: email,
+        password: password,
       },
-      withCredentials: true,
     })
-      .then((response) => {
-       const token=response.data;
-       const user=jwt(token);
-       console.log(user);
-       console.log(user.sub);
-       alert("Successful "+user.sub);
+    .then((response) => {
+      const token = response.data;
+      setToken(token);
+      localStorage.setItem('token', token);
+      console.log(token);
+      navigate("/blogs");
 
-      })
-      .catch((err) => {
+    })
+    .catch((err) => {
         alert(err.response.data.message);
-      });
+    });
   };
-  console.log(window.location);
   return (
     <div>
       <div className="login_box">
@@ -51,9 +43,9 @@ function SignIn() {
             type="text"
             name="uname"
             placeholder="Enter your email"
-            value={uname}
+            value={email}
             required
-            onChange={handleChange}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <br />
           <input
@@ -61,9 +53,9 @@ function SignIn() {
             type="password"
             name="pass"
             placeholder="Enter Your password"
-            value={pass}
+            value={password}
             required
-            onChange={handleChange}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <br />
           <button id="button1" value="submit">

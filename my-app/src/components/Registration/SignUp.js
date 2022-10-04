@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "./SignUp.css";
-const axios = require("axios").default;
+import { authcontext } from "../Component/AuthContext"; 
+import { useNavigate } from "react-router-dom";
+import React, { Component }  from 'react';
+import axios from "axios";
 
 function SignUp() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const { setToken } = useContext(authcontext);
+  const navigate = useNavigate();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -19,15 +24,16 @@ function SignUp() {
         name: name,
         phone: phone,
       },
-      withCredentials: true,
     })
     .then((response) => {
-        console.log(response.data);
+      alert("Sucessfully Registerd");
+      setToken(JSON.stringify(response.data));
+      navigate("/blogs");
     })
     .catch((err) => {
         alert(err.response.data.message);
     });
-    //console.log(email + " " + name + " " + phone + " " + password);
+    console.log(email + " " + name + " " + phone + " " + password);
   }; 
   return (
     <div className="login_box">

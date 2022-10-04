@@ -1,16 +1,24 @@
 import "./Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import React, { Component }  from 'react';
 
 export default function Navbar() {
+
+  const navigate = useNavigate();
+  const logout = (e) => {
+      e.preventDefault();
+      localStorage.clear();
+      navigate("/");
+  }
   return (
     <nav className="nav">
       <p>TECH WORLD WITH HASEB</p>
       <ul>
         <li>
-          <a href="/logout">Logout</a>
+          <Link to="/logout" onClick={logout}>Logout</Link>
         </li>
         <li>
-          <a href="/createblog">CreateBlog</a>
+          <Link to="/createblog">CreateBlog</Link>
         </li>
         <li>
           <Link to="/blogs">Blogs</Link>
