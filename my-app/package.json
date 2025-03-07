@@ -40,7 +40,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babel-eslint": "^9.0.0",
     "prettier": "^2.7.1"
   }
 }
